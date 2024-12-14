@@ -24,8 +24,28 @@ export const handleRegister = async (username, password, fullName, setError, nav
       full_name: fullName,
     });
     console.log('Реєстрація пройшла успішно', response.data);
-    navigate('/register');
+    navigate('/');
   } catch (err) {
     setError('Цей логін вже зайнятий');
+  }
+};
+
+export const loginUser = async (username, password, setError, navigate) => {
+  try {
+    const response = await api.post('/login', new URLSearchParams({
+      username,
+      password,
+    }), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    });
+
+    localStorage.setItem('token', response.data.access_token);
+    console.log('Авторизація пройшла успішно');
+    navigate('/');
+    return response.data;
+  } catch (err) {
+    setError('Невірний логін або пароль');
   }
 };

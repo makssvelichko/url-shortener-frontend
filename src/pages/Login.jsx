@@ -1,42 +1,38 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
-import { handleRegister } from '../services/authService';
+import { loginUser } from '../services/authService';
 import '../styles/loginandregister.css';
 
-const Register = () => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [fullName, setFullName] = useState('');
   const [error, setError] = useState('');
   const [usernameError, setUsernameError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-  const [fullNameError, setFullNameError] = useState(false);
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     setError('');
     setUsernameError(false);
     setPasswordError(false);
-    setFullNameError(false);
 
-    if (!username || !password || !fullName) {
+    if (!username || !password) {
       if (!username) setUsernameError(true);
       if (!password) setPasswordError(true);
-      if (!fullName) setFullNameError(true);
       return;
     }
 
-    handleRegister(username, password, fullName, setError, navigate);
+    loginUser(username, password, setError, navigate);
   };
 
   return (
-    <div className="register-container">
+    <div className="login-container">
       <div className="box">
-        <form className="register-form" onSubmit={handleSubmit}>
-          <h2>Реєстрація</h2>
+        <h2>Авторизація</h2>
+        <form onSubmit={handleLogin} className="form-group">
           <div className="form-group">
-            <label>Логін:</label>
+            <label>Логін</label>
             <input
               type="text"
               value={username}
@@ -46,7 +42,7 @@ const Register = () => {
             />
           </div>
           <div className="form-group">
-            <label>Пароль:</label>
+            <label>Пароль</label>
             <input
               type="password"
               value={password}
@@ -55,23 +51,13 @@ const Register = () => {
               placeholder={passwordError ? 'Поле Пароль не може бути порожнім' : ''}
             />
           </div>
-          <div className="form-group">
-            <label>Повне ім'я:</label>
-            <input
-              type="text"
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              className={fullNameError ? 'error' : ''}
-              placeholder={fullNameError ? 'Поле Імя не може бути порожнім' : ''}
-            />
-          </div>
-          {error && <p className="error-message">{error}</p>}
-          <button type="submit">Зареєструватися</button>
+          {error && <div className="error-message">{error}</div>}
+          <button type="submit">Увійти</button>
         </form>
         <p className='plogin'>
-          Вже є акаунт?{' '}
-          <Link to="/login" className='plink'>
-            Увійти
+          Немає акаунту?{' '}
+          <Link to="/register" className='plink'>
+            Зареєструватися
           </Link>
         </p>
       </div>
@@ -79,4 +65,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Login;
