@@ -8,7 +8,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: linear-gradient(to right, #00b09b89, #96c93d8b);
+    background: linear-gradient(to right, #f4faff, #cae6ff);
   }
   
   .box {
@@ -47,7 +47,7 @@ body {
   }
   
   .form-group input:focus {
-    border-color: #00b09b;
+    border-color: #007bff;
     outline: none;
   }
   
@@ -55,7 +55,7 @@ body {
     margin-top: 30px;
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #00b09b;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
@@ -64,7 +64,7 @@ body {
   }
   
   button:hover {
-    background-color: #009b7f;
+    background-color: #0056b3;
   }
   
   .error {
@@ -90,6 +90,6 @@ body {
   }
 
   .plink {
-    color: #00b09b;
+    color: #007bff;
     text-decoration: none; 
   }

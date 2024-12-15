@@ -27,6 +27,12 @@ const Register = () => {
       return;
     }
 
+    if (password.length < 8) {
+      setPasswordError(true);
+      setError('Пароль має бути не менше 8 символів');
+      return;
+    }
+
     handleRegister(username, password, fullName, setError, navigate);
   };
 
