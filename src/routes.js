@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import ShortenURL from './pages/ShortenURL';
@@ -9,6 +9,9 @@ import PublicRoute from './components/PublicRoute';
 const AppRoutes = () => {
   return (
     <Routes>
+
+      <Route path="/" element={<Navigate to="/login" />} />
+
       <Route
         path="/register"
         element={

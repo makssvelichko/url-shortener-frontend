@@ -1,11 +1,7 @@
 import api from '../api.js';
 
-
-
-
 export const handleRegister = async (username, password, fullName, setError, navigate) => {
   try {
-    // Реєстрація користувача
     const response = await api.post('/register', {
       username,
       password,
@@ -130,6 +126,28 @@ export const getUserName = async () => {
     throw err;
   }
 };
+
+export const fetchLinkRedirects = async (short) => {
+  const token = localStorage.getItem('token'); 
+
+  if (!token) {
+    throw new Error('Необхідна авторизація. Токен відсутній.');
+  }
+
+  try {
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    const response = await api.get(`/me/links/${short}/redirects`, { headers });
+    
+    return response.data.length;
+  } catch (err) {
+    console.error('Помилка при отриманні кількості переходів:', err);
+    throw err;
+  }
+};
+
 
 
 
