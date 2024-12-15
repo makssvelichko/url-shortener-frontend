@@ -10,6 +10,7 @@ const ShortenURL = () => {
   const [userUrls, setUserUrls] = useState([]);
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
+  const [user, setUser] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,7 +26,7 @@ const ShortenURL = () => {
     try {
       const data = await shortenUrl(url);
       setShortenedUrl(data.short);
-      fetchUserUrls();  // Оновлення списку URL-адрес після створення нового посилання
+      fetchUserUrls();
     } catch (err) {
       console.error('Детальна помилка:', err);
       setError(err.response?.data?.message || err.message || 'Щось пішло не так');
@@ -34,9 +35,9 @@ const ShortenURL = () => {
 
   const fetchUserUrls = async () => {
     try {
-      const data = await getUserUrls();  // Отримуємо URL-адреси тільки для поточного користувача
+      const data = await getUserUrls(); 
       console.log('Отримані URL:', data);
-      setUserUrls(data);  // Зберігаємо лише посилання поточного користувача
+      setUserUrls(data);
     } catch (err) {
       console.error('Помилка при отриманні URL користувача:', err);
     }
@@ -50,15 +51,17 @@ const ShortenURL = () => {
   useEffect(() => {
     const fetchUserName = async () => {
       try {
+        const full_user = await getUserName();
         const user = await getUserName();
-        setUserName(user.full_name);
+        setUserName(full_user.full_name);
+        setUser(user.username);
       } catch (error) {
         console.error('Не вдалося отримати ім\'я користувача:', error);
       }
     };
 
     fetchUserName();
-    fetchUserUrls();  // Оновлюємо список посилань при кожному заході на сторінку
+    fetchUserUrls();
   }, []);
 
   const handleViewAll = () => {
@@ -72,7 +75,7 @@ const ShortenURL = () => {
         <div className="langandexit">
           <div className="language-switch">
             <span role="img" aria-label="language"></span>
-            {userName ? `Привіт, ${userName}` : ''}
+            {userName ? `Привіт, ${userName}` : `Привіт, ${user}`}
           </div>
           <div onClick={handleLogout} className="exit-button">EXIT</div>
         </div>
