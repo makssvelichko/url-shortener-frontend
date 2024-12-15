@@ -20,13 +20,14 @@
 
 .language-switch {
   margin-right: 35px;
-  font-size: 16px;
+  font-size: 18px;
   cursor: pointer;
 }
 
 .langandexit{
   margin-right: 50px;
   display: flex;
+  align-items: center;
   justify-content: space-between;
   cursor: pointer;
 }
@@ -49,7 +50,7 @@
 }
 
 .shorten-box h1 {
-  font-size: 42px;
+  font-size: 40px;
   font-weight: bold;
   color: #000;
   margin-bottom: 120px;
@@ -131,9 +132,10 @@
 }
 
 .exit-button{
+  margin: 3px;
   display: flex;
-  padding-top: 3px;
-  padding-bottom: 4px;
+  padding-top: 5px;
+  padding-bottom: 6px;
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 4px;
@@ -146,13 +148,13 @@
 }
 
 .shorten-box {
-  width: 75%;
+  width: 68%;
   padding: 20px;
   box-sizing: border-box;
 }
 
 .user-urls {
-  width: 25%;
+  width: 32%;
   padding: 20px;
   box-sizing: border-box;
   border-left: 2px solid #ccc;
@@ -174,4 +176,11 @@
 .success-message{
   margin-top: 25px;
   font-size: 18px;
+}
+
+.view-short-redirects-button{
+  width: 125px;
+  margin: 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }

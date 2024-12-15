@@ -77,7 +77,7 @@ const ShortenURL = () => {
             <span role="img" aria-label="language"></span>
             {userName ? `Привіт, ${userName}` : `Привіт, ${user}`}
           </div>
-          <div onClick={handleLogout} className="exit-button">EXIT</div>
+          <div onClick={handleLogout} className="exit-button"><b>EXIT</b></div>
         </div>
       </nav>
   
@@ -123,6 +123,12 @@ const ShortenURL = () => {
               {userUrls.slice(0, 3).map((url, index) => (
                 <li key={index}>
                   <p><strong>Скорочене посилання:</strong> <a href={`http://localhost:8000/${url.short}`} target="_blank" rel="noopener noreferrer">{url.short}</a></p>
+                  <p><button 
+                    className="view-short-redirects-button" 
+                    onClick={() => navigate(`/link/${url.short}`)}
+                  >
+                    Статистика
+                  </button></p>
                 </li>
               ))}
             </ul>

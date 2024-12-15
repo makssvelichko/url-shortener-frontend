@@ -79,4 +79,15 @@
 .back-button:hover {
     background-color: #003a77;
 }
-  
+
+.view-redirects-button{
+    margin: 0;
+    width: 240px;
+}
+
+.button-view{
+    justify-content: right;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}

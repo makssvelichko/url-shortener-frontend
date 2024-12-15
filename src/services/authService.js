@@ -128,7 +128,7 @@ export const getUserName = async () => {
 };
 
 export const fetchLinkRedirects = async (short) => {
-  const token = localStorage.getItem('token'); 
+  const token = localStorage.getItem('token');
 
   if (!token) {
     throw new Error('Необхідна авторизація. Токен відсутній.');
@@ -140,13 +140,20 @@ export const fetchLinkRedirects = async (short) => {
     };
 
     const response = await api.get(`/me/links/${short}/redirects`, { headers });
-    
-    return response.data.length;
+
+    console.log('Response data:', response.data);
+
+    if (Array.isArray(response.data)) {
+      return response.data;
+    }
+
+    return [];
   } catch (err) {
     console.error('Помилка при отриманні кількості переходів:', err);
     throw err;
   }
 };
+
 
 
 

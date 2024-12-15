@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getUserUrls, fetchLinkRedirects } from '../services/authService';
+import { getUserUrls } from '../services/authService';
 import '../styles/allUrls.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,25 +18,6 @@ const AllUrlsPage = () => {
       console.error('Помилка при отриманні URL користувача:', err);
       setError('Не вдалося завантажити посилання. Спробуйте пізніше.');
       setLoading(false);
-    }
-  };
-
-  const handleLinkClick = async (shortUrl, index) => {
-    try {
-      // Отримуємо кількість переходів з сервера
-      const newRedirectCount = await fetchLinkRedirects(shortUrl);
-
-      // Оновлюємо локальний стан для відображення нової кількості переходів
-      setUserUrls((prevUrls) => {
-        const updatedUrls = [...prevUrls];
-        updatedUrls[index] = {
-          ...updatedUrls[index],
-          redirects: newRedirectCount,
-        };
-        return updatedUrls;
-      });
-    } catch (err) {
-      console.error('Помилка при оновленні кількості переходів:', err);
     }
   };
 
@@ -82,13 +63,18 @@ const AllUrlsPage = () => {
                   href={`http://localhost:8000/${url.short}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  onClick={() => handleLinkClick(url.short, index)}
                 >
                   {url.short}
                 </a>
               </p>
               <p><strong>Дата створення:</strong> {formatDate(url.created_at)}</p>
               <p><strong>Кількість переходів:</strong> {url.redirects}</p>
+              <div className='button-view'><button 
+                className="view-redirects-button" 
+                onClick={() => navigate(`/link/${url.short}`)}
+              >
+                Переглянути графік кліків
+              </button></div>
             </li>
           ))}
         </ul>

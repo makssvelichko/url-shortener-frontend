@@ -3,6 +3,7 @@ import Register from './pages/Register';
 import Login from './pages/Login';
 import ShortenURL from './pages/ShortenURL';
 import AllUrlPage from './pages/AllUrlPage';
+import LinkClicksPage from './pages/LinkClicksPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import PublicRoute from './components/PublicRoute';
 
@@ -42,6 +43,14 @@ const AppRoutes = () => {
         element={
           <ProtectedRoute>
             <AllUrlPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/link/:short"
+        element={
+          <ProtectedRoute>
+            <LinkClicksPage />
           </ProtectedRoute>
         }
       />
